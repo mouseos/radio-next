@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		<!--font awesome-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<!--material icons-->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<title>CM放送サービス</title>
+		<link rel="stylesheet" href="/style/style.css">
+	</head>
+	<body>
+		<nav>
+			<div class="nav-contents">
+				<button class="nav-menu-button" onclick="show_hide_menu()"><i class="material-icons">menu</i></button>
+				<span class="nav-title">CM放送サービス</span>
+			</div>
+			<div class="slide-menu-contents">
+				<ul>
+					<a href="#"><li>menu</li></a>
+					<a href="#"><li>menu</li></a>
+					<a href="#"><li>menu</li></a>
+					<a href="#"><li>menu</li></a>
+				</ul>
+			</div>
+		</nav>
+		<!--画像スライダー（記事などスライド表示）-->
+		<div class="slider">
+			
+		</div>
+		
+		
+		<main>
+			<h1>CM放送について</h1>
+			<p>CM放送サービスのページをご覧いただきありがとうございます。<br>
+			Sapporo City FMはインターネット放送で24時間放送を行っております。<br>
+			一般的な放送局と比較し知名度は低いですが、その代わりにCM放送を無料で承っております。</p>
+			<h2>応募詳細</h2>
+			<p>料金：無料（追加費用が生じることはありません。）<br>
+			<br>
+			条件：規約に違反していないこと。<br>
+			Sapporo City FMの紹介文掲載義務：あります。ウェブページやSNSでSapporo City FMを宣伝してください。</p>
+
+			<h2>規約</h2>
+			<p>1,内容の制限
+			以下のような内容を含むCM、その他Sapporo City FMが不適切と判断したものについては放送を拒否します。</p>
+			<ul>
+				<li>誹謗中傷的な内容を含むもの</li>
+				<li>政治、宗教などに特化した内容</li>
+				<li>性的内容をメインとするもの</li>
+				<li>規約を守っていないもの</li>
+			</ul>
+			<p>2,秒数<br>
+			秒数は15秒,30秒,1分のうちどれかです。<br>
+			<br>
+			3,ファイル形式<br>
+			wav m4a<br>
+			<br>
+			4,使用楽曲について<br>
+			CM内で使用する音声は著作権フリー、著作権保護期間終了、本人・著作権管理団体の使用許諾済みの物のみ使用できます。著作権管理団体によって異なりますがJASRACの場合本人承諾を得ても使用することはできません。<br>
+			<br>
+			5,収録について<br>
+			収録は依頼者にしていただきます。<br>
+			<br>
+			6,料金は一切いただきませんが、Sapporo City FMの紹介文をウェブサイトやSNSにCM放送期間中に週1回掲載していただく義務があります。</p>
+			<h1>応募フォーム</h1>
+			<form>
+				<label for="person_name">ユーザー名（または氏名）</label>
+				<input type="text" id="person_name" name="person_name" required><br>
+				<label for="cm_name">広告名</label>
+				<input type="text" id="cm_name" name="cm_name" required><br>
+				
+				<label for="cm_description">内容の簡単な説明</label>
+				<textarea id="cm_description" name="cm_description" required></textarea><br>
+				
+				<label for="cm_length">長さ</label>
+				<select id="cm_length" name="cm_length" required>
+					<option value="15">15秒</option>
+					<option value="30">30秒</option>
+					<option value="60">1分</option>
+					<option value="その他（要相談）">その他（要相談）</option>
+				</select><br>
+				<label for="other">その他</label>
+				<textarea id="other" name="other" required></textarea><br>
+				<input class="normal" type="button" value="送信" onclick="submitForm()">
+			</form>
+
+			<script>
+				function submitForm() {
+					// 入力値を取得
+					let personName = document.getElementById("person_name").value;
+					let cmName = document.getElementById("cm_name").value;
+					let cmDescription = document.getElementById("cm_description").value;
+					let cmLength = document.getElementById("cm_length").value;
+					let other = document.getElementById("other").value;
+					// 必須項目が空の場合、アラートを表示して処理を中止
+					if (!cmName || !cmDescription || !cmLength || !personName) {
+						alert("ユーザー名（または氏名）、広告名、内容の簡単な説明、長さは必須項目です。");
+						return;
+					}
+					// メールの本文を作成
+					let body = 
+					"ユーザー名（もしくは氏名）: " + cmName + "%0D%0A"
+					+ "広告名: " + cmName + "%0D%0A"
+					+ "内容の簡単な説明: " + cmDescription + "%0D%0A"
+					+ "長さ: " + cmLength + "%0D%0A"
+					+ "その他: " + other;
+					// メーラーを起動
+					location.href = "mailto:sapporocity.fm@gmail.com?subject=番組募集&body=" + body;
+				}
+			</script>
+		</main>
+		<footer>
+			
+		</footer>
+		<script type="text/javascript" src="/script/script.js"></script>
+		<script type="text/javascript" src="/script/nowplaying.js"></script>
+	</body>
+</html>

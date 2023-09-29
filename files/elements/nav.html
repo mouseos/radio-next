@@ -1,0 +1,48 @@
+<!--ナビゲーションバー用ファイル。単体で呼び出すことはない。-->
+
+<div class="nav-contents">
+	<button class="nav-menu-button" onclick="show_hide_menu()"><i class="material-icons">menu</i></button>
+	<span class="nav-title">
+	<a href="/index_web.html">
+		<img class="none_on_smartphone logo-pc" src="/img/icons/logo.png">
+		<img class="none_on_pc logo-mobile" src="/img/icons/logo_mobile.png">
+	</a>
+	</span>
+<!--現在放送中の曲を表示-->
+	<div class="left">
+		<div class="nowplaying">
+			<div class="nowplaying-title"><p class="marquee">読み込み中...</p></div>
+		</div>
+		<button class="nav-menu-button play-radio" onclick="stream_start_stop()">
+			<i class="material-icons">
+				<span class="material-symbols-outlined">
+					play_arrow
+				</span>
+			</i>
+		</button>
+	</div>
+	<audio id="streaming" src="http://std1.ladio.net:8030/scfm" preload="none"></audio>
+
+</div>
+<div class="slide-menu-contents">
+	<div id="clock">
+		<span id="hours"></span>
+		<span id="colon">:</span>
+		<span id="minutes"></span>
+		<iframe id="weather" frameborder="0"  src="/files/elements/weather.html"></iframe>
+	</div>
+	<ul>
+		<a href="/"><li>トップページ</li></a>
+		<a href="/pages/timetable.html"><li>番組表</li></a>
+		<a href="/pages/cm.html"><li>番組募集</li></a>
+		<a href="/pages/cm.html"><li>CM放送サービス</li></a>
+		<a href="/pages/about.html"><li>Sapporo City FMについて</li></a>
+		<a href="/pages/contact.html"><li>お問い合わせ</li></a>
+	</ul>
+	<div class="sns">
+	<div class="twitter">
+		<h1>Twitter</h1>
+		<a class="twitter-timeline" href="https://twitter.com/scfm888?ref_src=twsrc%5Etfw">Tweets by scfm888</a>
+	</div>
+</div>
+</div>

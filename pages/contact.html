@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		<!--font awesome-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<!--material icons-->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<title>お問い合わせ</title>
+		<link rel="stylesheet" href="/style/style.css">
+	</head>
+	<body>
+		<nav>
+
+		</nav>
+		<!--画像スライダー（記事などスライド表示）-->
+		<div class="slider">
+			
+		</div>
+		
+		
+		<main>
+			<h1>お問い合わせ</h1>
+			<form>
+				<label for="person_name">ユーザー名（または氏名）</label>
+				<input type="text" id="person_name" name="person_name" required><br>
+				<label for="text">本文</label>
+				<textarea id="text" name="text" required></textarea><br>
+				<input class="normal" type="button" value="送信" onclick="submitForm()">
+			</form>
+
+			<script>
+				function submitForm() {
+					// 入力値を取得
+					let personName = document.getElementById("person_name").value;
+					let text = document.getElementById("text").value;
+					// 必須項目が空の場合、アラートを表示して処理を中止
+					if (!text || !personName) {
+						alert("ユーザー名（または氏名）、本文は必須項目です。");
+						return;
+					}
+					// メールの本文を作成
+					let body = 
+					"ユーザー名（もしくは氏名）: " + personName + "%0D%0A"
+					+ "本文: " + text + "%0D%0A";
+					// メーラーを起動
+					location.href = "mailto:sapporocity.fm@gmail.com?subject=番組募集&body=" + body;
+				}
+			</script>
+		</main>
+		<footer>
+
+		</footer>
+		<script type="text/javascript" src="/script/script.js"></script>
+		<script type="text/javascript" src="/script/nowplaying.js"></script>
+	</body>
+</html>

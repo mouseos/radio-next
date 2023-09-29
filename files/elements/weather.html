@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+			<style>
+				@keyframes fade-in{
+					0%{
+					opacity: 0;
+					}
+					100%{
+					opacity: 1;
+					}
+				}
+
+				@keyframes fade-out {
+					0%{
+					opacity: 1;
+					}
+					100%{
+					opacity: 0;
+					}
+				}
+				.weather-area{
+					background-color: rgba(255, 255, 255, 0.8);
+					-webkit-backdrop-filter: blur(4px);
+					backdrop-filter: blur(4px);
+					border-radius: 1em;
+					padding:1px 10px 1px;
+					margin:1px 13px 1px;
+					width:10em;
+				}
+				.box1,.weather{
+					display:flex;
+					font-weight:bold;
+				}
+				.dbox{
+					width:1em;
+					bottom:50%;
+					margin-top: auto;
+					margin-bottom: auto;
+					padding-right:1em;
+					line-height: 1em;
+					font-size:1.3em;
+				}
+				p.city{
+					width:4em;
+					font-size:1.3em;
+				}
+
+				.max{
+					color:#DB4D4D;
+				}
+				.min{
+					color:#2768B1;
+				}
+				.weather{
+				display:none;
+				animation: fade-in .7s ease;
+				font-family: 'line-seed';
+				position: relative;
+
+				font-size:1.1em;
+
+				line-height: 0em;
+				}
+				@font-face {
+				font-family: 'line-seed';
+				src: url('./LINESeedJP_OTF_Bd.woff2') format('woff2');
+				}
+
+				</style>
+	<div class="weather-area">
+	</div>
+		<script type="module">
+			let areas=["016010","016020","012010","017010","040010","130010","230010","270000","340010","400010","471010"]//エリア番号をここに入力。https://weather.tsukumijima.net/primary_area.xmlを参照してください。
+			
+			async function get_json(area_id){
+				const data = await fetch("https://weather.tsukumijima.net/api/forecast/city/"+area_id);//json取得
+				const json=((await data.json()));
+				return(await json);
+			}
+			
+			//get_json(area);
+			let html='';
+			for(const area of areas){
+				const json=(await get_json(area));
+				let city=(json["location"]["city"]);
+				for(const forecast of json["forecasts"]){
+					//console.log(json);
+					let dateLabel=(forecast["dateLabel"]);//明日など
+					let telop=(forecast["telop"]);//曇りなど
+					let image=(forecast["image"]["url"]);//天気画像
+					let max_temp=(forecast["temperature"]["max"]["celsius"]);//最高気温
+					let min_temp=(forecast["temperature"]["min"]["celsius"]);//最低気温
+					//console.log("telop:"+telop+" dateLabel:"+dateLabel+" image:"+image);
+					if(dateLabel=="明後日"){
+						dateLabel="あさって";
+					}else if(dateLabel=="明日"){
+						dateLabel="あす";
+					}else if(dateLabel=="今日"){
+						dateLabel="きょう";
+					}
+					let html_tmp=`
+								<div class="weather">
+									<div class="dbox">
+										`+dateLabel+`
+									</div>
+									<div class="wbox">
+										<div class="">
+											<p class="city">`+city+`</p>
+											<img src="`+image+`"/>
+										</div>
+										<div class="box1">
+											<p class="min">`+min_temp+`℃</p><p>/<p><p class="max">`+max_temp+`℃</p>
+										</div>
+									</div>
+								</div>`;
+					if(max_temp!=null && min_temp!=null){
+						html+=(html_tmp);
+					}
+				}
+			}
+			const weather_area = document.querySelector(".weather-area");//.weather-dataを取得
+			weather_area.innerHTML=html;//.weather-dataの中身をhtml変数の中身に変更
+			const weather_area_htmls = document.querySelectorAll("div.weather");//.weather-dataを取得
+			//表示非表示切り替え
+			let cnt=0;//位置記憶
+			function change_weather(){
+					if(cnt!=0){
+						weather_area_htmls[cnt-1].style.animationName ='fade-out';
+						weather_area_htmls[cnt-1].style.display = 'none';
+					}else{
+						weather_area_htmls[(weather_area_htmls.length)-1].style.animationName ='fade-out';
+						weather_area_htmls[(weather_area_htmls.length)-1].style.display = 'none';
+					}
+
+					//前の天気を非表示
+					weather_area_htmls[cnt].style.animationName ='fade-in';
+					weather_area_htmls[cnt].style.display = 'flex';//次の天気を表示
+					if(cnt!=(weather_area_htmls.length)-1){
+						cnt++;
+					}else{
+						cnt=0;
+					}
+					
+					setTimeout(change_weather, 5000);
+			}
+			change_weather(weather_area_htmls);
+		</script>
+
+	</body>
+</html>
