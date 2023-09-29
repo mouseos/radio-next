@@ -94,8 +94,8 @@ async function setHTML(path,selector) {
   }
 }
 
-setHTML('/files/elements/nav.html','nav');
-setHTML('/files/elements/footer.html','footer');
+setHTML('/radio-next/files/elements/nav.html','nav');
+setHTML('/radio-next/files/elements/footer.html','footer');
 //ストリーミングプレイヤー
 function stream_start_stop(){
 	let play_btn = document.querySelector('.play-radio>i');
