@@ -20,11 +20,11 @@
 
 @font-face {
 	font-family: 'line-seed';
-	src: url('/font/LINESeedJP_OTF_Rg.woff2') format('woff2');
+	src: url('/radio-next/font/LINESeedJP_OTF_Rg.woff2') format('woff2');
 }
 @font-face {
 	font-family: 'akasaka';
-	src: url('/font/akasaka-regular.ttf') format('truetype');
+	src: url('/radio-next/font/akasaka-regular.ttf') format('truetype');
 }
 
 /*入力やボタンのフォント*/
